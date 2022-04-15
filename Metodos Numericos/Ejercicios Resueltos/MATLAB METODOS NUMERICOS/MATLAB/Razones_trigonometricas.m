@@ -1,0 +1,20 @@
+clc;
+syms x;
+y=input('ingrese la funcion:  ');
+c=input('ingrese la cantidad de angulos');
+i=0;
+while i<c;
+  r=input ('ingrese el angulo:  ');
+  u=(r*pi)/180;
+   p=subs(y,x,u);
+   i=i+1;
+   disp(p);
+end
+t=0:360;
+y1=sind(t);y2=cosd(t);y3=tand(t);y4=cotd(t);y5=secd(t);y6=cscd(t);
+subplot(3,2,1);plot(t,y1);title('seno');
+subplot(3,2,2);plot(t,y2);title('cos');
+subplot(3,2,3);plot(t,y3);title('tan');
+subplot(3,2,4);plot(t,y4);title('cot');
+subplot(3,2,5);plot(t,y5);title('sec');
+subplot(3,2,6);plot(t,y6);title('csc');

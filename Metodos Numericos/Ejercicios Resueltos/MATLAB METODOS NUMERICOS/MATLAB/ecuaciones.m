@@ -1,0 +1,14 @@
+A=[2 3 4;3 2 1;2 3 4];
+B=[5 10 11;3 2 5;5 6 7];
+C=[2 3 8;5 10 12;5 7 9];
+D1= det(A); D2= det(B); D3= det(C);
+x=D2/D1;
+y=D3/D1;
+disp('valor de x:');disp(x); 
+disp('valor de y:'); disp(y);
+disp('matriz A:'); disp(A); 
+disp('matriz B:'); disp(B); 
+disp('matriz C:'); disp(C);
+disp('determinates:'); disp(D1); disp(D2); disp(D3);
+suma=A+B+C;
+disp('suma Matriz A+B+C:'); disp(suma);
