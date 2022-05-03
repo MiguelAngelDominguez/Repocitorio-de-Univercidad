@@ -27,7 +27,7 @@ fx = lambda x: 2*np.sin(np.sqrt(x))-x
 gx = lambda x: 2*np.sin(np.sqrt(x))
 
 a = 0.5 # intervalo
-b = 12
+b = 100
 tolera = 0.001
 iteramax = 100  # itera máximo
 muestras = 51  # gráfico
@@ -41,7 +41,7 @@ print(respuesta)
 # GRAFICAMOS
 xi = np.linspace(a,b,muestras)
 fi = fx(xi)
-gi = gx(xi)
+gi = gx(xi) 
 yi = xi
 
 plt.plot(xi,fi, label='f(x)')
