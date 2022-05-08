@@ -2,18 +2,17 @@ import numpy as np
 import matplotlib.pyplot as plt
 import math
 
-def Bisec(fun, x_a, x_b, steps=10):
+def Bisec(fun, x_a, x_b, eps=None, steps=10):
+    if fun(x_a) * fun(x_b) >= 0:
+        print("The bisection method cannot be applied")
+        return None
+    
+    if eps is not None:
+        steps = math.ceil(math.log((x_b - x_a) / eps) / math.log(2))
     n=0
-    x_ant=0
-    error_a=0
-    valor_v=6.405124837953327
-    error_rpv=0
-    for n in range(steps+1):
+    for n in range(steps + 1):
         x_m = (x_a + x_b) / 2
-        error_a=(x_m-x_ant)*100 / x_m
-        error_v=valor_v-x_m
-        error_rpv=(error_v/valor_v)
-
+        
         if f(x_m) == 0:
             return x_m
         
@@ -21,9 +20,8 @@ def Bisec(fun, x_a, x_b, steps=10):
             x_b = x_m
         else:
             x_a = x_m
-        x_ant=x_m
     
-    return (x_a + x_b) / 2,n,error_a,error_rpv
+    return (x_a + x_b) / 2,n
 
 def raicesEcuacion_2(a,b,c):
     determinate=caso=((b**2)-(4*c*a))**(1/2)
@@ -58,8 +56,6 @@ f = lambda x: (a*x**2)+(b*x)+c
 Graficar_funcion(f,-50,50)
 print("________________________________")
 print(" -  por metodo de biseccion :")
-x_max,n,error_a,error_rpv=Bisec(f,5,10)
+x_max,n=Bisec(f,5,10,1e-12)
 print(f" - para en la iteracion : {n}")
 print(f" - x max : {x_max}")
-print(f" - error aproximado : {error_a}")
-print(f" - error rpv : {error_rpv}")
