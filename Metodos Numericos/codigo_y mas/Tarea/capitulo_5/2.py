@@ -15,7 +15,8 @@ def Bisec(fun, x_a, x_b, steps=100):
         if (error_a<error_s):
             return x_m,n,error_a
 
-        error_a=abs((x_m-x_ant)/ (x_m+x_ant))
+        if(x_m!=0):
+            error_a=abs((x_b-x_a)/(x_b+x_a))
         print("error actual : ",error_a)
         print("error s : ",error_s)
         

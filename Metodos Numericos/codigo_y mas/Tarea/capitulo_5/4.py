@@ -3,26 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import math
 
-def Bisec(fun, x_a, x_b, eps=None, steps=10):    
-    for n in range(steps + 1):
-        xr=(x_a+x_b)/2
-        ea=abs((x_b-x_a)/(x_b+x_a))
-        if (ea<eps):
-            return xr
-        if f(xr) == 0:
-            return xr
-        
-        test=f(x_a)*f(xr)
-        if test < 0:
-            x_b = xr
-        elif test>0 :
-            x_a = xr
-        else:
-            ea=0
-        
-    return xr
-
-def falsap(funcion, x_a, x_b, iteraciones=100, error_r=0.001):
+def falsaPosicion(funcion, x_a, x_b, iteraciones=100, error_r=0.001):
     # Se inicializan las variables 
     solucion= None
     contador = 0
@@ -71,14 +52,4 @@ Graficar_funcion(f,-100,100)
 
 print("________________________________")
 print(" - por metodo de la falsa posicion : ")
-falsap(f,-1,1)
-# tabla,ntabla,tramo=PosicionFalsa(f,0.5,1,0.02)
-# np.set_printoptions(precision=4)
-# for i in range(0,ntabla,1):
-#     print('iteración:  ',i)
-#     print('[a,c,b]:    ', tabla[i,0:3])
-#     print('[fa,fc,fb]: ', tabla[i,3:6])
-#     print('[tramo]:    ', tabla[i,6])
-
-# print('raiz:  ',c)
-# print('error: ',tramo)
+falsaPosicion(f,-1,1)

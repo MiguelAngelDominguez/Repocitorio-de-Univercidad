@@ -3,10 +3,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 import math
 
-def Bisec(fun, x_a, x_b, eps=None, steps=10):    
+def Bisec(fun, x_a, x_b, eps=None, steps=100):    
     for n in range(steps + 1):
         xr=(x_a+x_b)/2
-        ea=abs((x_b-x_a)/(x_b+x_a))
+        if(xr!=0):
+            ea=abs((x_b-x_a)/(x_b+x_a))
         if (ea<eps):
             return xr
         if f(xr) == 0:
@@ -22,28 +23,24 @@ def Bisec(fun, x_a, x_b, eps=None, steps=10):
         
     return xr
 
-def PosicionFalsa(fun,x_a,x_b,eps=None):
-    tabla = []
-    tramo = abs(x_b-x_a)
-    fa = fun(x_a)
-    fb = fun(x_b)
-    while not(tramo<=eps):
-        c = x_b - (fb*(x_a-x_b)/(fa-fb))
-        fc = fun(c)
-        tabla.append([x_a,c,x_b,fa,fc,fb,tramo])
-        cambio =(fa)*(fc)
-        if cambio>0:
-            tramo = abs(c-x_a)
-            x_a = c
-            fa = fc
-        else:
-            tramo = abs(b-c)
-            x_b = c
-            fb = fc
+def falsaPosicion(funcion, x_a, x_b,error_r=0.001, iteraciones=100):
+    # Se inicializan las variables 
+    solucion= None
+    contador = 0
+    error_calculado = 101
+    while contador <= iteraciones and error_calculado>error_r:
+        contador+=1
+        solucion = x_b-((funcion(x_b)*(x_b - x_a))/(funcion(x_b) - funcion(x_a)))
+        error_calculado = abs((solucion - x_a)/solucion)*100
+        #Se redefine el nuevo intervalo con los signos 
+        if funcion(x_a) * funcion(solucion)>=0: 
+            x_a = solucion
+        else: 
+            x_b = solucion 
             
-    tabla = np.array(tabla)
-    ntabla = len(tabla) 
-    return tabla,ntabla,tramo
+    print('la solucion aproximada es: {:.3f}'.format(solucion))
+    print('encontrada en: {:.0f}'.format(contador) + ' iteraciones')
+    print('con un error de:{:.3f}'.format(error_calculado) + '%' )
 
 def Graficar_funcion(fx,inicio, parada,semilla=1000):
     xi=np.linspace(inicio,parada,semilla)
@@ -61,8 +58,8 @@ a = 0.7
 b = -8
 c = 44
 d = -90
-e = -25182 
-f_ = 0
+e = 82 
+f_ = -25
 print("________________________________")
 print(f"teniendo una forma de :  {a}x^5 + {b}x^4 + {c}x^3 + {d}x^2 + {e}x + {f_} \n\n")
 
@@ -76,13 +73,4 @@ print(f" - x : {x}")
 
 print("________________________________")
 print(" - por metodo de la falsa posicion : ")
-tabla,ntabla,tramo=PosicionFalsa(f,0.5,1,0.02)
-np.set_printoptions(precision=4)
-for i in range(0,ntabla,1):
-    print('iteración:  ',i)
-    print('[a,c,b]:    ', tabla[i,0:3])
-    print('[fa,fc,fb]: ', tabla[i,3:6])
-    print('[tramo]:    ', tabla[i,6])
-
-print('raiz:  ',c)
-print('error: ',tramo)
+falsaPosicion(f,0.5,1,0.02)
