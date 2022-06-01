@@ -1,3 +1,5 @@
+import numpy as np
+
 def puntofijo(gx,a,tolera, iteramax = 15):
     i = 1 # iteración
     b = gx(a)

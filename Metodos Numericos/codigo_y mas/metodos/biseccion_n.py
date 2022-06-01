@@ -20,3 +20,5 @@ def Bisec(fun, x_a, x_b, steps=10):
         x_ant=x_m
     
     return (x_a + x_b) / 2,n,error_a,error_rpv
+
+f = lambda x: (x**5)+3

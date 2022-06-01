@@ -18,3 +18,5 @@ def Bisec(fun, x_a, x_b, eps=None, steps=100):
             ea=0
         
     return xr
+
+f = lambda x: (x**5)+3
